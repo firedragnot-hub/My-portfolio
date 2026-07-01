@@ -1,10 +1,47 @@
 import React from 'react';
 
 export default function Contact() {
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitStatus, setSubmitStatus] = React.useState(null); // 'success' | 'error' | null
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Action handler for messaging form submission
-    alert('Thank you for your message! This form is now integrated with your profile.');
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    const formData = new FormData(e.target);
+    // Use Web3Forms access key from environment variables
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    
+    if (!accessKey) {
+      alert("Form submission is not configured yet. Please add VITE_WEB3FORMS_ACCESS_KEY to your environment variables.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    formData.append("access_key", accessKey);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus('success');
+        e.target.reset();
+      } else {
+        console.error("Web3Forms Error:", data);
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error("Submission Error:", error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -82,9 +119,35 @@ export default function Contact() {
                 <label for="message" class="block text-xs font-bold text-slate-400 uppercase tracking-wider">Message</label>
                 <textarea id="message" name="message" rows="5" required class="w-full bg-slate-950 border border-slate-800 rounded-xl py-4 px-4 text-white text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all duration-300 resize-none" placeholder="Write your message details here..."></textarea>
               </div>
-              <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-indigo-500/10 transform active:scale-[0.98] transition-all duration-300">
-                Send Message
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                class="w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-800 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-indigo-500/10 transform active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Sending...
+                  </>
+                ) : (
+                  "Send Message"
+                )}
               </button>
+
+              {submitStatus === 'success' && (
+                <div class="p-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl text-sm font-medium text-center">
+                  Message sent successfully! Thank you for reaching out.
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div class="p-4 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-xl text-sm font-medium text-center">
+                  Failed to send message. Please try again or email directly.
+                </div>
+              )}
             </form>
           </div>
 
