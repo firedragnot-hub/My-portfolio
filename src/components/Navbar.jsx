@@ -30,13 +30,18 @@ export default function Navbar() {
       } top-0 left-0 w-full flex justify-between items-center px-6 md:px-12 lg:px-20 z-50 transition-all duration-300`}
     >
       {/* Logo */}
-      <a href="#home" className="logo-box text-2xl font-extrabold tracking-wider transition-colors duration-300">
+      <a href="#home" className="flex items-center gap-3 group focus:outline-none">
+        <img
+          src="/logo.png"
+          alt="Aman Singh Logo"
+          className="h-10 w-auto rounded-lg shadow-sm object-contain bg-white p-1 border border-slate-200 group-hover:scale-105 transition-transform duration-300"
+        />
         <span
-          className={`border-4 px-3 py-1 inline-block select-none ${
-            isScrolled ? 'border-slate-950 text-slate-950' : 'border-slate-950 text-slate-950 dark:border-white dark:text-white'
+          className={`font-extrabold tracking-wide text-lg select-none ${
+            isScrolled ? 'text-slate-950' : 'text-slate-950 dark:text-white'
           }`}
         >
-          AS
+          AMAN SINGH
         </span>
       </a>
 

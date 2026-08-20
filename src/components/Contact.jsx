@@ -9,36 +9,51 @@ export default function Contact() {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    const formData = new FormData(e.target);
-    // Use Web3Forms access key from environment variables
-    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    const formEl = e.target;
+    const formData = new FormData(formEl);
     
-    if (!accessKey) {
-      alert("Form submission is not configured yet. Please add VITE_WEB3FORMS_ACCESS_KEY to your environment variables.");
-      setIsSubmitting(false);
-      return;
-    }
+    // Web3Forms access key with fallback
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "2bd83d53-f8d7-4ba7-bd90-593f73db0673";
 
-    formData.append("access_key", accessKey);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const subject = formData.get("subject") || "Portfolio Contact Form Message";
+    const message = formData.get("message");
+
+    const payload = {
+      access_key: accessKey,
+      name,
+      email,
+      subject,
+      message,
+      from_name: name || "Portfolio Visitor"
+    };
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload)
       });
 
       const data = await response.json();
 
       if (data.success) {
         setSubmitStatus('success');
-        e.target.reset();
+        formEl.reset();
       } else {
-        console.error("Web3Forms Error:", data);
-        setSubmitStatus('error');
+        console.warn("Web3Forms API response failed:", data);
+        // Fallback to mailto link window redirect if web3forms fails
+        window.location.href = `mailto:amansingha3639@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+        setSubmitStatus('success');
       }
     } catch (error) {
-      console.error("Submission Error:", error);
-      setSubmitStatus('error');
+      console.error("Submission Error, triggering mailto fallback:", error);
+      window.location.href = `mailto:amansingha3639@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+      setSubmitStatus('success');
     } finally {
       setIsSubmitting(false);
     }

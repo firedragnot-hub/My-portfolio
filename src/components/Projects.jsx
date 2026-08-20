@@ -13,8 +13,13 @@ export default function Projects() {
         {/* Projects Card Grid */}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           
-          {/* Project 1 */}
-          <div class="group bg-slate-50 border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:border-slate-200 transition-all duration-300 flex flex-col justify-between">
+          {/* Project 1: Insurance */}
+          <a
+            href="https://insurance-premium-calculation.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group bg-slate-50 border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:border-slate-200 transition-all duration-300 flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 block no-underline"
+          >
             {/* Top Accent Line */}
             <div class="h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500 w-full"></div>
             <div class="p-8 flex-grow">
@@ -37,15 +42,20 @@ export default function Projects() {
                 <span class="bg-emerald-50 text-emerald-700 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full uppercase">Machine Learning</span>
                 <span class="bg-purple-50 text-purple-700 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full uppercase">Predictive Analytics</span>
               </div>
-              <a href="https://insurance-premium-calculation-1.onrender.com/login" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-extrabold tracking-wider text-slate-950 uppercase hover:text-indigo-600 group/link transition-colors">
+              <div class="inline-flex items-center gap-2 text-xs font-extrabold tracking-wider text-slate-950 uppercase group-hover:text-indigo-600 transition-colors">
                 View Project
-                <i class="fa-solid fa-arrow-right text-[10px] transform group-hover/link:translate-x-1 transition-transform"></i>
-              </a>
+                <i class="fa-solid fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+              </div>
             </div>
-          </div>
+          </a>
 
-          {/* Project 2 */}
-          <div class="group bg-slate-50 border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:border-slate-200 transition-all duration-300 flex flex-col justify-between">
+          {/* Project 2: Dynamic Pricing */}
+          <a
+            href="https://teglretail.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group bg-slate-50 border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:border-slate-200 transition-all duration-300 flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 block no-underline"
+          >
             {/* Top Accent Line */}
             <div class="h-1.5 bg-gradient-to-r from-emerald-500 to-blue-500 w-full"></div>
             <div class="p-8 flex-grow">
@@ -68,15 +78,20 @@ export default function Projects() {
                 <span class="bg-purple-50 text-purple-700 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full uppercase">Machine Learning</span>
                 <span class="bg-yellow-50 text-yellow-700 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full uppercase">Scikit-Learn</span>
               </div>
-              <a href="#" class="inline-flex items-center gap-2 text-xs font-extrabold tracking-wider text-slate-950 uppercase hover:text-emerald-600 group/link transition-colors">
-                View Details 
-                <i class="fa-solid fa-arrow-right text-[10px] transform group-hover/link:translate-x-1 transition-transform"></i>
-              </a>
+              <div class="inline-flex items-center gap-2 text-xs font-extrabold tracking-wider text-slate-950 uppercase group-hover:text-emerald-600 transition-colors">
+                View Project 
+                <i class="fa-solid fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+              </div>
             </div>
-          </div>
+          </a>
 
-          {/* Project 3 */}
-          <div class="group bg-slate-50 border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:border-slate-200 transition-all duration-300 flex flex-col justify-between">
+          {/* Project 3: Structural Defect */}
+          <a
+            href="https://struct-scan-ai-qxyb.onrender.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group bg-slate-50 border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:border-slate-200 transition-all duration-300 flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500 block no-underline"
+          >
             {/* Top Accent Line */}
             <div class="h-1.5 bg-gradient-to-r from-purple-500 to-pink-500 w-full"></div>
             <div class="p-8 flex-grow">
@@ -99,12 +114,12 @@ export default function Projects() {
                 <span class="bg-blue-50 text-blue-700 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full uppercase">OpenCV</span>
                 <span class="bg-emerald-50 text-emerald-700 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-full uppercase">Deep Learning</span>
               </div>
-              <a href="https://struct-scan-ai-2.onrender.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-extrabold tracking-wider text-slate-950 uppercase hover:text-purple-600 group/link transition-colors">
+              <div class="inline-flex items-center gap-2 text-xs font-extrabold tracking-wider text-slate-950 uppercase group-hover:text-purple-600 transition-colors">
                 View Project
-                <i class="fa-solid fa-arrow-right text-[10px] transform group-hover/link:translate-x-1 transition-transform"></i>
-              </a>
+                <i class="fa-solid fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+              </div>
             </div>
-          </div>
+          </a>
 
         </div>
       </div>
